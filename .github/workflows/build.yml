@@ -1,0 +1,13 @@
+name: Build Windows VST3
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cmake -B build -A x64
+      - run: cmake --build build --config Release --target Paragon8_VST3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Paragon-8-VST3
+          path: build/Paragon8_artefacts/Release/VST3
